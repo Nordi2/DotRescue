@@ -38,6 +38,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Play_Area
+    uniqueID: 2220021943
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
