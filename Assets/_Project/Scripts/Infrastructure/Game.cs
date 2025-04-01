@@ -1,3 +1,5 @@
+using _Project.Scripts.Infrastructure.Services;
+
 namespace _Project.Scripts.Infrastructure
 {
     public class Game

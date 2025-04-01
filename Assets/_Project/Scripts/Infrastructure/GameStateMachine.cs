@@ -1,5 +1,8 @@
 using System;
 using System.Collections.Generic;
+using _Project.Scripts.Infrastructure.Factory;
+using _Project.Scripts.Infrastructure.Services;
+using _Project.Scripts.Infrastructure.States;
 
 namespace _Project.Scripts.Infrastructure
 {
@@ -13,7 +16,7 @@ namespace _Project.Scripts.Infrastructure
             _states = new Dictionary<Type, IExitableState>()
             {
                 [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader, services),
-                [typeof(LoadLevelState)] = new LoadLevelState(this,sceneLoader,curtain),
+                [typeof(LoadLevelState)] = new LoadLevelState(this,sceneLoader,curtain,services.Single<IGameFactory>()),
                 [typeof(GameLoopState)] = new GameLoopState(this)
             };
         }

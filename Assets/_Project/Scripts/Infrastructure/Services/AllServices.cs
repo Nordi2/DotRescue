@@ -1,4 +1,4 @@
-namespace _Project.Scripts.Infrastructure
+namespace _Project.Scripts.Infrastructure.Services
 {
     public class AllServices
     {
