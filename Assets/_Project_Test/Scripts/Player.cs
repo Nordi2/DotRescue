@@ -4,7 +4,7 @@ namespace _Project_Test.Scripts
 {
     public class Player : MonoBehaviour
     {
-        [SerializeField] private float _rotateSpeed;
+        public float _rotateSpeed;
         
         private void Update()
         {

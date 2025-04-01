@@ -1,4 +1,7 @@
-﻿using _Project.Scripts.Infrastructure.AssetManagement;
+﻿using _Project_Test.Scripts;
+using _Project.Scripts.Infrastructure.AssetManagement;
+using _Project.Scripts.Infrastructure.Services.StaticData;
+using _Project.Scripts.StaticData;
 using UnityEngine;
 
 namespace _Project.Scripts.Infrastructure.Factory
@@ -7,10 +10,14 @@ namespace _Project.Scripts.Infrastructure.Factory
         IGameFactory
     {
         private readonly IAssetProvider _assetProvider;
-
-        public GameFactory(IAssetProvider assetProvider)
+        private readonly IStaticDataService _staticDataService;
+        
+        public GameFactory(
+            IAssetProvider assetProvider,
+            IStaticDataService staticDataService)
         {
             _assetProvider = assetProvider;
+            _staticDataService = staticDataService;
         }
 
         public GameObject CreateHud()
@@ -22,6 +29,12 @@ namespace _Project.Scripts.Infrastructure.Factory
         public GameObject CreatePlayer()
         {
             GameObject playerPrefab = Object.Instantiate(_assetProvider.LoadAsset(AssetPath.PlayerPath));
+
+            PlayerConfig config = _staticDataService.GetData<PlayerConfig>();
+
+            Player player = playerPrefab.GetComponentInChildren<Player>();
+            player._rotateSpeed = config.RotationSpeed;
+            
             return playerPrefab;
         }
 
