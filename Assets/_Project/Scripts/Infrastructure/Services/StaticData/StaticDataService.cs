@@ -9,14 +9,14 @@ namespace _Project.Scripts.Infrastructure.Services.StaticData
     public class StaticDataService :
         IStaticDataService
     {
+        private const string ConfigsPath = "Configs";
+        
         private Dictionary<Type, Object> _staticData = new();
 
         public void LoadStaticData()
         {
-            _staticData = Resources.LoadAll("Configs").ToDictionary(n => n.GetType(), n => n);
-
-            foreach (var data in _staticData)
-                Debug.Log(data.Key.ToString());
+            _staticData = Resources.LoadAll(ConfigsPath)
+                .ToDictionary(key => key.GetType(), config => config);
         }
 
         public T GetData<T>() where T : class

@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c33946485224bf0b2390e2a3a0f3061, type: 3}
   m_Name: PlayerConfig
   m_EditorClassIdentifier: 
-  <RotationSpeed>k__BackingField: 125
+  <RotationSpeed>k__BackingField: 140

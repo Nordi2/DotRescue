@@ -1,6 +1,7 @@
 using _Project.Scripts.Infrastructure.AssetManagement;
 using _Project.Scripts.Infrastructure.Factory;
 using _Project.Scripts.Infrastructure.Services;
+using _Project.Scripts.Infrastructure.Services.GameLoop;
 using _Project.Scripts.Infrastructure.Services.Input;
 using _Project.Scripts.Infrastructure.Services.StaticData;
 using UnityEngine;
@@ -12,7 +13,7 @@ namespace _Project.Scripts.Infrastructure.States
     {
         private const string Bootstrap = "Bootstrap";
         private const string Gameplay = "Gameplay";
-        private const string InputService = "[InputService]";
+        private const string GameLoop = "[GameLoopService]";
 
         private readonly GameStateMachine _stateMachine;
         private readonly SceneLoader _sceneLoader;
@@ -47,10 +48,22 @@ namespace _Project.Scripts.Infrastructure.States
         private void RegisterServices()
         {
             RegisterStaticData();
+            IGameLoopService gameLoopService = RegisterGameLoop();
+            IInputService inputService = new InputService();
+            
+            _services.RegisterSingle(gameLoopService);
+            _services.RegisterSingle(inputService);
             _services.RegisterSingle<IAssetProvider>(new AssetProvider());
-            _services.RegisterSingle<IGameFactory>(new GameFactory(_services.Single<IAssetProvider>(),
-                _services.Single<IStaticDataService>()));
-            _services.RegisterSingle(RegisterInputService());
+            _services.RegisterSingle<IGameFactory>(new GameFactory(
+                _services.Single<IAssetProvider>(),
+                _services.Single<IStaticDataService>(),
+                _services.Single<IGameLoopService>(),
+                _services.Single<IInputService>()));
+            
+            gameLoopService.AddListener(inputService);
+
+            _services.RegisterSingle(inputService);
+            _services.RegisterSingle(gameLoopService);
         }
 
         private void RegisterStaticData()
@@ -60,11 +73,11 @@ namespace _Project.Scripts.Infrastructure.States
             _services.RegisterSingle(staticDataService);
         }
 
-        private IInputService RegisterInputService()
+        private IGameLoopService RegisterGameLoop()
         {
-            InputService inputService = new GameObject(InputService).AddComponent<InputService>();
-            Object.DontDestroyOnLoad(inputService.gameObject);
-            return inputService;
+            GameLoopService gameLoopService = new GameObject(GameLoop).AddComponent<GameLoopService>();
+            Object.DontDestroyOnLoad(gameLoopService.gameObject);
+            return gameLoopService;
         }
     }
 }
