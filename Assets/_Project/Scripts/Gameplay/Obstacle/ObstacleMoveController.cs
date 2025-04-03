@@ -1,7 +1,6 @@
 ﻿using _Project.Scripts.Gameplay.Interfaces;
 using _Project.Scripts.Infrastructure.Services.GameLoop;
 using _Project.Scripts.StaticData;
-using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace _Project.Scripts.Gameplay.Obstacle
@@ -11,13 +10,13 @@ namespace _Project.Scripts.Gameplay.Obstacle
         IGameStartListener,
         IGameFinishListener
     {
+        private float _rotateTime;
+        private float _currentRotationSpeed;
+        private bool _isPauseGame = true;
+        
         private readonly IMovable _obstacleMovement;
         private readonly ObstacleStatsTimeSwitcher _obstacleStatsTimeSwitcher;
         private readonly ObstacleConfig _config;
-
-        private float _rotateTime;
-        private float _currentRotationSpeed;
-        private bool _isStartGame = true;
         
         public ObstacleMoveController(
             IMovable obstacleMovement,
@@ -31,7 +30,7 @@ namespace _Project.Scripts.Gameplay.Obstacle
 
         void IGameUpdateListener.Update(float deltaTime)
         {
-            if(_isStartGame)
+            if(_isPauseGame)
                 return;
             
             _obstacleStatsTimeSwitcher.Update(deltaTime);
@@ -40,7 +39,7 @@ namespace _Project.Scripts.Gameplay.Obstacle
 
         void IGameStartListener.StartGame()
         {
-            _isStartGame = false;
+            _isPauseGame = false;
             
             _obstacleStatsTimeSwitcher.OnCompleteTimer += CompleteTimer;
             RandomizeStatsObstacle();
@@ -48,7 +47,7 @@ namespace _Project.Scripts.Gameplay.Obstacle
 
         void IGameFinishListener.FinishGame()
         {
-            _isStartGame = true;
+            _isPauseGame = true;
             
             _obstacleStatsTimeSwitcher.OnCompleteTimer -= CompleteTimer;
         }

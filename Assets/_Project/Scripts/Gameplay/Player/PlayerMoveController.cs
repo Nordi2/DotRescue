@@ -10,7 +10,7 @@ namespace _Project.Scripts.Gameplay.Player
         IGameStartListener,
         IGameFinishListener
     {
-        private bool _isGamePaused = true;
+        private bool _isPauseGame = true;
         
         private readonly IInputService _inputService;
         private readonly IMovable _playerMovement;
@@ -25,7 +25,7 @@ namespace _Project.Scripts.Gameplay.Player
 
         void IGameUpdateListener.Update(float deltaTime)
         {
-            if(_isGamePaused)
+            if(_isPauseGame)
                 return;
             
             _playerMovement.Update(deltaTime);
@@ -33,7 +33,7 @@ namespace _Project.Scripts.Gameplay.Player
 
         void IGameStartListener.StartGame()
         {
-            _isGamePaused = false;
+            _isPauseGame = false;
             _inputService.OnClickLeftMouseButton += ClickMouseButton;
         }
 

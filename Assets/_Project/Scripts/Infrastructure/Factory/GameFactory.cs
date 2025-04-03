@@ -1,6 +1,8 @@
 ﻿using _Project.Scripts.Gameplay;
 using _Project.Scripts.Gameplay.Obstacle;
 using _Project.Scripts.Gameplay.Player;
+using _Project.Scripts.Gameplay.Score;
+using _Project.Scripts.Gameplay.UI;
 using _Project.Scripts.Infrastructure.AssetManagement;
 using _Project.Scripts.Infrastructure.Services.GameLoop;
 using _Project.Scripts.Infrastructure.Services.Input;
@@ -17,7 +19,7 @@ namespace _Project.Scripts.Infrastructure.Factory
         private readonly IStaticDataService _staticDataService;
         private readonly IGameLoopService _gameLoopService;
         private readonly IInputService _inputService;
-        
+
         public GameFactory(
             IAssetProvider assetProvider,
             IStaticDataService staticDataService,
@@ -36,7 +38,7 @@ namespace _Project.Scripts.Infrastructure.Factory
                 _inputService,
                 _gameLoopService,
                 playerFacade);
-            
+
             _gameLoopService.AddDisposable(gameLoopController);
         }
 
@@ -44,6 +46,16 @@ namespace _Project.Scripts.Infrastructure.Factory
         {
             GameObject hudPrefab = Object.Instantiate(_assetProvider.LoadAsset(AssetPath.HudPath));
 
+            ScoreConfig scoreConfig = _staticDataService.GetData<ScoreConfig>();
+            
+            TextScoreView textScoreView = hudPrefab.GetComponent<TextScoreView>();
+            StorageScore storageScore = new StorageScore(scoreConfig.AddedScore, scoreConfig.InitialScore);
+
+            ScorePresenter scorePresenter = new ScorePresenter(storageScore, textScoreView);
+            
+            _gameLoopService.AddListener(scorePresenter);
+            _gameLoopService.AddListener(storageScore);
+            
             return hudPrefab;
         }
 
@@ -80,7 +92,7 @@ namespace _Project.Scripts.Infrastructure.Factory
                 movement,
                 obstacleStatsTimeSwitcher,
                 config);
-            
+
             _gameLoopService.AddListener(moveController);
 
             return obstaclePrefab;
