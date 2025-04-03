@@ -7,8 +7,11 @@ namespace _Project.Scripts.Gameplay.Player
 {
     public class PlayerMoveController : 
         IGameUpdateListener,
-        IDisposable
+        IGameStartListener,
+        IGameFinishListener
     {
+        private bool _isGamePaused = true;
+        
         private readonly IInputService _inputService;
         private readonly IMovable _playerMovement;
         
@@ -18,15 +21,26 @@ namespace _Project.Scripts.Gameplay.Player
         {
             _inputService = inputService;
             _playerMovement = playerMovement;
+        }
 
+        void IGameUpdateListener.Update(float deltaTime)
+        {
+            if(_isGamePaused)
+                return;
+            
+            _playerMovement.Update(deltaTime);
+        }
+
+        void IGameStartListener.StartGame()
+        {
+            _isGamePaused = false;
             _inputService.OnClickLeftMouseButton += ClickMouseButton;
         }
 
-        void IGameUpdateListener.Update(float deltaTime) => 
-            _playerMovement.Update(deltaTime);
-
-        void IDisposable.Dispose() => 
+        void IGameFinishListener.FinishGame()
+        {
             _inputService.OnClickLeftMouseButton -= ClickMouseButton;
+        }
 
         private void ClickMouseButton() => 
             _playerMovement.SwitchSides();

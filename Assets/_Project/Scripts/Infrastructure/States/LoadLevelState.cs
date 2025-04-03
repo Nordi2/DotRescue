@@ -1,3 +1,4 @@
+using _Project.Scripts.Gameplay.Player;
 using _Project.Scripts.Infrastructure.Factory;
 
 namespace _Project.Scripts.Infrastructure.States
@@ -40,10 +41,11 @@ namespace _Project.Scripts.Infrastructure.States
 
         private void InitGameWorld()
         {
-            _gameFactory.CreatePlayer();
+            PlayerFacade playerFacade = _gameFactory.CreatePlayer();
             _gameFactory.CreatePlayArea();
             _gameFactory.CreateObstacle();
             _gameFactory.CreateHud();
+            _gameFactory.CreateGameLoopController(playerFacade);
         }
     }
 }

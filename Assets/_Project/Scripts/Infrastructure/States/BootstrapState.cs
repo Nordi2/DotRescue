@@ -1,3 +1,4 @@
+using _Project.Scripts.Gameplay;
 using _Project.Scripts.Infrastructure.AssetManagement;
 using _Project.Scripts.Infrastructure.Factory;
 using _Project.Scripts.Infrastructure.Services;
@@ -59,7 +60,7 @@ namespace _Project.Scripts.Infrastructure.States
                 _services.Single<IStaticDataService>(),
                 _services.Single<IGameLoopService>(),
                 _services.Single<IInputService>()));
-            
+
             gameLoopService.AddListener(inputService);
 
             _services.RegisterSingle(inputService);

@@ -50,3 +50,6 @@ TagManager:
   - name: Obstacle
     uniqueID: 4234443069
     locked: 0
+  - name: Effect
+    uniqueID: 1805491361
+    locked: 0
