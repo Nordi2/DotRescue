@@ -8,5 +8,6 @@ namespace _Project.Scripts.Infrastructure.Factory
     {
         void CreateUIRoot();
         PauseTextView CreateInitialPauseText();
+        PopupScoringView CreatePopupScoring();
     }
 }

@@ -11,7 +11,8 @@ namespace _Project.Scripts.Infrastructure.Factory
     {
         private const string UIRootPath = "UI/UIRoot";
         private const string InitialPauseTextPath = "UI/InitialPause";
-        
+        private const string PopupScoringPath = "UI/Popup_Scoring";
+
         private IInputService _inputService;
         private IAssetProvider _assetProvider;
 
@@ -25,13 +26,20 @@ namespace _Project.Scripts.Infrastructure.Factory
             _inputService = inputService;
         }
 
+        public PopupScoringView CreatePopupScoring()
+        {
+            GameObject popupScoring = Object.Instantiate(_assetProvider.LoadAsset(PopupScoringPath), _uiRoot);
+
+            return popupScoring.GetComponent<PopupScoringView>();
+        }
+
         public PauseTextView CreateInitialPauseText()
         {
             GameObject uiText = Object.Instantiate(_assetProvider.LoadAsset(InitialPauseTextPath), _uiRoot);
-            
+
             PauseTextView view = uiText.GetComponent<PauseTextView>();
             PauseTextPresenter presenter = new PauseTextPresenter(view, _inputService);
-            
+
             return view;
         }
 

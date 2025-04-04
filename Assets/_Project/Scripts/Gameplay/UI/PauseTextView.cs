@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using NaughtyAttributes;
 using TMPro;
@@ -28,6 +29,12 @@ namespace _Project.Scripts.Gameplay.UI
                 _tween.Kill();
             
             gameObject.SetActive(false);
+        }
+
+        private void OnDestroy()
+        {
+            if (_tween is not null)
+                _tween.Kill();
         }
     }
 }

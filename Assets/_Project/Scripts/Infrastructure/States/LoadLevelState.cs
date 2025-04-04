@@ -55,6 +55,8 @@ namespace _Project.Scripts.Infrastructure.States
             _uiFactory.CreateUIRoot();
             PauseTextView pauseText = _uiFactory.CreateInitialPauseText();
             pauseText.StartAnimation();
+            PopupScoringView popupScoring = _uiFactory.CreatePopupScoring();
+            popupScoring.gameObject.SetActive(false);
         }
     }
 }
