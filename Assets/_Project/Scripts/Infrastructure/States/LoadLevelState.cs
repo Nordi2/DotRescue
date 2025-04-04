@@ -1,5 +1,7 @@
 using _Project.Scripts.Gameplay.Player;
+using _Project.Scripts.Gameplay.UI;
 using _Project.Scripts.Infrastructure.Factory;
+using DG.Tweening;
 
 namespace _Project.Scripts.Infrastructure.States
 {
@@ -10,17 +12,20 @@ namespace _Project.Scripts.Infrastructure.States
         private readonly SceneLoader _sceneLoader;
         private readonly LoadingCurtain _curtain;
         private readonly IGameFactory _gameFactory;
+        private readonly IUIFactory _uiFactory;
 
         public LoadLevelState(
             GameStateMachine stateMachine,
             SceneLoader sceneLoader,
             LoadingCurtain curtain,
-            IGameFactory gameFactory)
+            IGameFactory gameFactory,
+            IUIFactory uiFactory)
         {
             _stateMachine = stateMachine;
             _sceneLoader = sceneLoader;
             _curtain = curtain;
             _gameFactory = gameFactory;
+            _uiFactory = uiFactory;
         }
 
         public void Enter(string sceneName)
@@ -34,6 +39,7 @@ namespace _Project.Scripts.Infrastructure.States
 
         private void OnLoaded()
         {
+            DOTween.Init();
             InitGameWorld();
 
             _stateMachine.Enter<GameLoopState>();
@@ -46,6 +52,9 @@ namespace _Project.Scripts.Infrastructure.States
             _gameFactory.CreateObstacle();
             _gameFactory.CreateHud();
             _gameFactory.CreateGameLoopController(playerFacade);
+            _uiFactory.CreateUIRoot();
+            PauseTextView pauseText = _uiFactory.CreateInitialPauseText();
+            pauseText.StartAnimation();
         }
     }
 }

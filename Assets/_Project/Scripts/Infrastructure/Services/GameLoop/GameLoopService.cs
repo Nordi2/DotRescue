@@ -30,10 +30,9 @@ namespace _Project.Scripts.Infrastructure.Services.GameLoop
             foreach (IGameFinishListener finishListener in _listFinishable)
                 finishListener.FinishGame();
             
-            foreach (IDisposable disposable in _listDisposables)
-                disposable.Dispose();
+            Dispose();
         }
-
+        
         private void Update()
         {
             foreach (IGameUpdateListener updatable in _listUpdateable)
@@ -45,7 +44,16 @@ namespace _Project.Scripts.Infrastructure.Services.GameLoop
             foreach (IGameFixedListener fixedUpdatable in _listFixedUpdateable)
                 fixedUpdatable.FixedUpdate(Time.fixedDeltaTime);
         }
-        
+
+        private void OnDestroy() => 
+            Dispose();
+
+        private void Dispose()
+        {
+            foreach (IDisposable disposable in _listDisposables)
+                disposable.Dispose();
+        }
+
         private void CheckTypeAndAddInList(IGameListener listener)
         {
             if (CheckType(listener, out IGameUpdateListener updateListener))

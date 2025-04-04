@@ -1,5 +1,4 @@
-using System;
-using System.Collections;
+using DG.Tweening;
 using UnityEngine;
 
 namespace _Project.Scripts.Infrastructure
@@ -19,18 +18,11 @@ namespace _Project.Scripts.Infrastructure
             _canvasGroup.alpha = 1;
         }
 
-        public void Hide() => 
-            StartCoroutine(FadeIn());
-
-        private IEnumerator FadeIn()
+        public void Hide()
         {
-            while (_canvasGroup.alpha > 0)
-            {
-                _canvasGroup.alpha -= 0.03f;
-                yield return new WaitForSeconds(0.03f);
-            }
-            
-            gameObject.SetActive(false);
+            _canvasGroup
+                .DOFade(0, 1f)
+                .OnComplete(() => gameObject.SetActive(false));
         }
     }
 }

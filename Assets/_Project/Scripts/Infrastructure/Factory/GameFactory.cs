@@ -45,7 +45,8 @@ namespace _Project.Scripts.Infrastructure.Factory
         public GameObject CreateHud()
         {
             GameObject hudPrefab = Object.Instantiate(_assetProvider.LoadAsset(AssetPath.HudPath));
-
+            
+            SettingCanvas();
             ScoreConfig scoreConfig = _staticDataService.GetData<ScoreConfig>();
             
             TextScoreView textScoreView = hudPrefab.GetComponent<TextScoreView>();
@@ -53,6 +54,13 @@ namespace _Project.Scripts.Infrastructure.Factory
 
             ScorePresenter scorePresenter = new ScorePresenter(storageScore, textScoreView);
             
+            void SettingCanvas()
+            {
+                Canvas canvas = hudPrefab.GetComponent<Canvas>();
+                canvas.renderMode = RenderMode.ScreenSpaceCamera;
+                canvas.worldCamera = Camera.main; 
+            }
+
             _gameLoopService.AddListener(scorePresenter);
             _gameLoopService.AddListener(storageScore);
             

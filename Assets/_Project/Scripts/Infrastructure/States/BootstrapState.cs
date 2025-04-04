@@ -5,6 +5,7 @@ using _Project.Scripts.Infrastructure.Services;
 using _Project.Scripts.Infrastructure.Services.GameLoop;
 using _Project.Scripts.Infrastructure.Services.Input;
 using _Project.Scripts.Infrastructure.Services.StaticData;
+using DG.Tweening;
 using UnityEngine;
 
 namespace _Project.Scripts.Infrastructure.States
@@ -61,6 +62,10 @@ namespace _Project.Scripts.Infrastructure.States
                 _services.Single<IGameLoopService>(),
                 _services.Single<IInputService>()));
 
+            _services.RegisterSingle<IUIFactory>(new UIFactory(
+                _services.Single<IAssetProvider>(),
+                _services.Single<IInputService>()));
+            
             gameLoopService.AddListener(inputService);
 
             _services.RegisterSingle(inputService);

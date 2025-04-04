@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: ScoreConfig
   m_EditorClassIdentifier: 
   <InitialScore>k__BackingField: 0
-  <AddedScore>k__BackingField: 0
+  <AddedScore>k__BackingField: 5
