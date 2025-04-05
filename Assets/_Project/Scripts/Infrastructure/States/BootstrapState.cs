@@ -12,7 +12,6 @@ namespace _Project.Scripts.Infrastructure.States
         IState
     {
         private const string Bootstrap = "Bootstrap";
-        private const string Gameplay = "Gameplay";
         private const string GameLoop = "[GameLoopService]";
 
         private readonly GameStateMachine _stateMachine;
@@ -43,7 +42,7 @@ namespace _Project.Scripts.Infrastructure.States
 
         private void EnterLoadLevel()
         {
-            _stateMachine.Enter<LoadLevelState, string>(Gameplay);
+            _stateMachine.Enter<MainMenuState>();
         }
 
         private void RegisterServices()

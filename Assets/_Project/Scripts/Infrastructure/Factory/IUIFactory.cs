@@ -11,5 +11,6 @@ namespace _Project.Scripts.Infrastructure.Factory
         void CreateUIRoot();
         PauseTextView CreateInitialPauseText();
         PopupScoringView CreatePopupScoring(IGameOverEvent gameOverEvent, StorageScore storageScore);
+        void CreateMainMenu();
     }
 }
