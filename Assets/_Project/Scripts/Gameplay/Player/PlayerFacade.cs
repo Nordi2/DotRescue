@@ -6,21 +6,22 @@ using UnityEngine;
 namespace _Project.Scripts.Gameplay.Player
 {
     public class PlayerFacade : MonoBehaviour,
-        IDieble
+        IDieble,IGameOverEvent
     {
-        public event Action OnDeath;
+        public event Action OnGameOver;
 
         private SpawnDieEffect _spawnDieEffect;
+
 
         public void Construct(SpawnDieEffect spawnDieEffect)
         {
             _spawnDieEffect = spawnDieEffect;
         }
-        
+
         public void Die()
         {
             _spawnDieEffect.SpawnDeathVfx();
-            OnDeath?.Invoke();
+            OnGameOver?.Invoke();
             gameObject.SetActive(false);
         }
 

@@ -1,4 +1,6 @@
-using _Project.Scripts.Gameplay.UI;
+using _Project.Scripts.Gameplay.Interfaces;
+using _Project.Scripts.Gameplay.Score;
+using _Project.Scripts.Gameplay.UI.View;
 using _Project.Scripts.Infrastructure.Services;
 
 namespace _Project.Scripts.Infrastructure.Factory
@@ -8,6 +10,6 @@ namespace _Project.Scripts.Infrastructure.Factory
     {
         void CreateUIRoot();
         PauseTextView CreateInitialPauseText();
-        PopupScoringView CreatePopupScoring();
+        PopupScoringView CreatePopupScoring(IGameOverEvent gameOverEvent, StorageScore storageScore);
     }
 }

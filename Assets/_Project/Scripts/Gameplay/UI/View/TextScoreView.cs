@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 
-namespace _Project.Scripts.Gameplay.UI
+namespace _Project.Scripts.Gameplay.UI.View
 {
     public class TextScoreView : MonoBehaviour
     {

@@ -1,4 +1,4 @@
-﻿using _Project.Scripts.Gameplay.UI;
+﻿using _Project.Scripts.Gameplay.UI.View;
 using _Project.Scripts.Infrastructure.Services.GameLoop;
 using _Project.Scripts.Infrastructure.Services.Input;
 

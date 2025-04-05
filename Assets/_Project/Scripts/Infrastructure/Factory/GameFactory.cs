@@ -1,8 +1,7 @@
-﻿using _Project.Scripts.Gameplay;
-using _Project.Scripts.Gameplay.Obstacle;
+﻿using _Project.Scripts.Gameplay.Obstacle;
 using _Project.Scripts.Gameplay.Player;
 using _Project.Scripts.Gameplay.Score;
-using _Project.Scripts.Gameplay.UI;
+using _Project.Scripts.Gameplay.UI.View;
 using _Project.Scripts.Infrastructure.AssetManagement;
 using _Project.Scripts.Infrastructure.Services.GameLoop;
 using _Project.Scripts.Infrastructure.Services.Input;
@@ -19,6 +18,8 @@ namespace _Project.Scripts.Infrastructure.Factory
         private readonly IStaticDataService _staticDataService;
         private readonly IGameLoopService _gameLoopService;
         private readonly IInputService _inputService;
+
+        public StorageScore StorageScore { get; private set; }
 
         public GameFactory(
             IAssetProvider assetProvider,
@@ -45,14 +46,14 @@ namespace _Project.Scripts.Infrastructure.Factory
         public GameObject CreateHud()
         {
             GameObject hudPrefab = Object.Instantiate(_assetProvider.LoadAsset(AssetPath.HudPath));
-            
+            Debug.Log("+");
             SettingCanvas();
             ScoreConfig scoreConfig = _staticDataService.GetData<ScoreConfig>();
             
             TextScoreView textScoreView = hudPrefab.GetComponent<TextScoreView>();
-            StorageScore storageScore = new StorageScore(scoreConfig.AddedScore, scoreConfig.InitialScore);
+            StorageScore = new StorageScore(scoreConfig.AddedScore, scoreConfig.InitialScore);
 
-            ScorePresenter scorePresenter = new ScorePresenter(storageScore, textScoreView);
+            ScorePresenter scorePresenter = new ScorePresenter(StorageScore, textScoreView);
             
             void SettingCanvas()
             {
@@ -62,7 +63,7 @@ namespace _Project.Scripts.Infrastructure.Factory
             }
 
             _gameLoopService.AddListener(scorePresenter);
-            _gameLoopService.AddListener(storageScore);
+            _gameLoopService.AddListener(StorageScore);
             
             return hudPrefab;
         }

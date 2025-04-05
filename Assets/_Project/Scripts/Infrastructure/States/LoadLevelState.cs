@@ -1,7 +1,9 @@
 using _Project.Scripts.Gameplay.Player;
 using _Project.Scripts.Gameplay.UI;
+using _Project.Scripts.Gameplay.UI.View;
 using _Project.Scripts.Infrastructure.Factory;
 using DG.Tweening;
+using UnityEngine;
 
 namespace _Project.Scripts.Infrastructure.States
 {
@@ -47,6 +49,8 @@ namespace _Project.Scripts.Infrastructure.States
 
         private void InitGameWorld()
         {
+            Debug.unityLogger.logEnabled = Debug.isDebugBuild;
+            
             PlayerFacade playerFacade = _gameFactory.CreatePlayer();
             _gameFactory.CreatePlayArea();
             _gameFactory.CreateObstacle();
@@ -55,7 +59,7 @@ namespace _Project.Scripts.Infrastructure.States
             _uiFactory.CreateUIRoot();
             PauseTextView pauseText = _uiFactory.CreateInitialPauseText();
             pauseText.StartAnimation();
-            PopupScoringView popupScoring = _uiFactory.CreatePopupScoring();
+            PopupScoringView popupScoring = _uiFactory.CreatePopupScoring(playerFacade,_gameFactory.StorageScore);
             popupScoring.gameObject.SetActive(false);
         }
     }

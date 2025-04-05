@@ -400,6 +400,7 @@ MonoBehaviour:
   _buttonGoMainMenu: {fileID: 5609929460627102699}
   _scoreText: {fileID: 1032303676377141900}
   _bodyCanvasGroup: {fileID: 3850526448531614111}
+  <Body>k__BackingField: {fileID: 3454359432113649103}
 --- !u!1 &5560315135454162449
 GameObject:
   m_ObjectHideFlags: 0

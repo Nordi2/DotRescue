@@ -1,5 +1,5 @@
 ﻿using System.Globalization;
-using _Project.Scripts.Gameplay.UI;
+using _Project.Scripts.Gameplay.UI.View;
 using _Project.Scripts.Infrastructure.Services.GameLoop;
 
 namespace _Project.Scripts.Gameplay.Score

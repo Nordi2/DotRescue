@@ -64,7 +64,8 @@ namespace _Project.Scripts.Infrastructure.States
 
             _services.RegisterSingle<IUIFactory>(new UIFactory(
                 _services.Single<IAssetProvider>(),
-                _services.Single<IInputService>()));
+                _services.Single<IInputService>(),
+                _services.Single<IGameLoopService>()));
             
             gameLoopService.AddListener(inputService);
 

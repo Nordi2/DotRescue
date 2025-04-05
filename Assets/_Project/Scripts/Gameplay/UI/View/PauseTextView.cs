@@ -1,16 +1,15 @@
-using System;
 using DG.Tweening;
 using NaughtyAttributes;
 using TMPro;
 using UnityEngine;
 
-namespace _Project.Scripts.Gameplay.UI
+namespace _Project.Scripts.Gameplay.UI.View
 {
     public class PauseTextView : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI _text;
         [SerializeField] private Ease _ease;
-        
+
         private Tween _tween;
 
         [Button]
@@ -25,13 +24,15 @@ namespace _Project.Scripts.Gameplay.UI
         [Button]
         public void StopAnimation()
         {
-            if (_tween is not null)
-                _tween.Kill();
-            
+            CheckAndKillAnimation();
+
             gameObject.SetActive(false);
         }
 
-        private void OnDestroy()
+        private void OnDestroy() => 
+            CheckAndKillAnimation();
+
+        private void CheckAndKillAnimation()
         {
             if (_tween is not null)
                 _tween.Kill();
