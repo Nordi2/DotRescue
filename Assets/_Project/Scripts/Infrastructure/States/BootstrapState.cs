@@ -1,11 +1,9 @@
-using _Project.Scripts.Gameplay;
 using _Project.Scripts.Infrastructure.AssetManagement;
 using _Project.Scripts.Infrastructure.Factory;
 using _Project.Scripts.Infrastructure.Services;
 using _Project.Scripts.Infrastructure.Services.GameLoop;
 using _Project.Scripts.Infrastructure.Services.Input;
 using _Project.Scripts.Infrastructure.Services.StaticData;
-using DG.Tweening;
 using UnityEngine;
 
 namespace _Project.Scripts.Infrastructure.States
@@ -35,6 +33,7 @@ namespace _Project.Scripts.Infrastructure.States
 
         public void Enter()
         {
+            Debug.unityLogger.logEnabled = Debug.isDebugBuild;
             _sceneLoader.Load(Bootstrap, onLoaded: EnterLoadLevel);
         }
 

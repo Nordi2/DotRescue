@@ -49,8 +49,6 @@ namespace _Project.Scripts.Infrastructure.States
 
         private void InitGameWorld()
         {
-            Debug.unityLogger.logEnabled = Debug.isDebugBuild;
-            
             PlayerFacade playerFacade = _gameFactory.CreatePlayer();
             _gameFactory.CreatePlayArea();
             _gameFactory.CreateObstacle();

@@ -1,4 +1,5 @@
-﻿using _Project.Scripts.Gameplay.Obstacle;
+﻿using System;
+using _Project.Scripts.Gameplay.Obstacle;
 using _Project.Scripts.Gameplay.Player;
 using _Project.Scripts.Gameplay.Score;
 using _Project.Scripts.Gameplay.UI.View;
@@ -7,7 +8,9 @@ using _Project.Scripts.Infrastructure.Services.GameLoop;
 using _Project.Scripts.Infrastructure.Services.Input;
 using _Project.Scripts.Infrastructure.Services.StaticData;
 using _Project.Scripts.StaticData;
+using DebugToolsPlus;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace _Project.Scripts.Infrastructure.Factory
 {
@@ -46,7 +49,9 @@ namespace _Project.Scripts.Infrastructure.Factory
         public GameObject CreateHud()
         {
             GameObject hudPrefab = Object.Instantiate(_assetProvider.LoadAsset(AssetPath.HudPath));
-            Debug.Log("+");
+            
+            D.Log("CREATED HUD", String.Empty, DColor.GREEN);
+            
             SettingCanvas();
             ScoreConfig scoreConfig = _staticDataService.GetData<ScoreConfig>();
             
