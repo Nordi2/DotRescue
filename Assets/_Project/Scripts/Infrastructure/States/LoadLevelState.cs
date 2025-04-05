@@ -1,15 +1,15 @@
-using _Project.Scripts.Gameplay.Player;
-using _Project.Scripts.Gameplay.UI;
+using _Project.Scripts.Gameplay.Interfaces;
 using _Project.Scripts.Gameplay.UI.View;
 using _Project.Scripts.Infrastructure.Factory;
 using DG.Tweening;
-using UnityEngine;
 
 namespace _Project.Scripts.Infrastructure.States
 {
     public class LoadLevelState :
         IPayloadedState<string>
     {
+        private IGameOverEvent _gameOverEvent;
+
         private readonly GameStateMachine _stateMachine;
         private readonly SceneLoader _sceneLoader;
         private readonly LoadingCurtain _curtain;
@@ -43,22 +43,35 @@ namespace _Project.Scripts.Infrastructure.States
         {
             DOTween.Init();
             InitGameWorld();
-
+            InitUI();
             _stateMachine.Enter<GameLoopState>();
+        }
+
+        private void InitUI()
+        {
+            _uiFactory.CreateUIRoot();
+            InitPauseText();
+            InitPopupScoring();
+            
+            void InitPauseText()
+            {
+                PauseTextView pauseText = _uiFactory.CreateInitialPauseText();
+                pauseText.StartAnimation();
+            }
+            void InitPopupScoring()
+            {
+                PopupScoringView popupScoring = _uiFactory.CreatePopupScoring(_gameOverEvent, _gameFactory.StorageScore);
+                popupScoring.gameObject.SetActive(false);
+            }
         }
 
         private void InitGameWorld()
         {
-            PlayerFacade playerFacade = _gameFactory.CreatePlayer();
             _gameFactory.CreatePlayArea();
             _gameFactory.CreateObstacle();
             _gameFactory.CreateHud();
-            _gameFactory.CreateGameLoopController(playerFacade);
-            _uiFactory.CreateUIRoot();
-            PauseTextView pauseText = _uiFactory.CreateInitialPauseText();
-            pauseText.StartAnimation();
-            PopupScoringView popupScoring = _uiFactory.CreatePopupScoring(playerFacade,_gameFactory.StorageScore);
-            popupScoring.gameObject.SetActive(false);
+            _gameOverEvent = _gameFactory.CreatePlayer();
+            _gameFactory.CreateGameLoopController(_gameOverEvent);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using _Project.Scripts.Gameplay.Interfaces;
 using _Project.Scripts.Gameplay.Obstacle;
 using _Project.Scripts.Gameplay.Player;
 using _Project.Scripts.Gameplay.Score;
@@ -36,21 +37,23 @@ namespace _Project.Scripts.Infrastructure.Factory
             _inputService = inputService;
         }
 
-        public void CreateGameLoopController(PlayerFacade playerFacade)
+        public void CreateGameLoopController(IGameOverEvent gameOverEvent)
         {
+            D.Log("CREATED INFRASTRUCTURE", "Gameloop_Controller", DColor.RED,true);
+            
             GameLoopController gameLoopController = new GameLoopController(
                 _inputService,
                 _gameLoopService,
-                playerFacade);
+                gameOverEvent);
 
             _gameLoopService.AddDisposable(gameLoopController);
         }
 
         public GameObject CreateHud()
         {
-            GameObject hudPrefab = Object.Instantiate(_assetProvider.LoadAsset(AssetPath.HudPath));
+            D.Log("CREATED WORLD OBJECT", "Hud", DColor.GREEN,true);
             
-            D.Log("CREATED HUD", String.Empty, DColor.GREEN);
+            GameObject hudPrefab = Object.Instantiate(_assetProvider.LoadAsset(AssetPath.HudPath));
             
             SettingCanvas();
             ScoreConfig scoreConfig = _staticDataService.GetData<ScoreConfig>();
@@ -75,6 +78,8 @@ namespace _Project.Scripts.Infrastructure.Factory
 
         public PlayerFacade CreatePlayer()
         {
+            D.Log("CREATED WORLD OBJECT", "Player", DColor.GREEN,true);
+            
             GameObject playerPrefab = Object.Instantiate(_assetProvider.LoadAsset(AssetPath.PlayerPath));
 
             PlayerConfig config = _staticDataService.GetData<PlayerConfig>();
@@ -95,6 +100,8 @@ namespace _Project.Scripts.Infrastructure.Factory
 
         public GameObject CreateObstacle()
         {
+            D.Log("CREATED WORLD OBJECT", "Obstacle", DColor.GREEN,true);
+            
             GameObject obstaclePrefab = Object.Instantiate(_assetProvider.LoadAsset(AssetPath.ObstaclePath));
 
             ObstacleConfig config = _staticDataService.GetData<ObstacleConfig>();
@@ -114,6 +121,8 @@ namespace _Project.Scripts.Infrastructure.Factory
 
         public GameObject CreatePlayArea()
         {
+            D.Log("CREATED WORLD OBJECT", "Play_Area", DColor.GREEN,true);
+            
             GameObject playAreaPrefab = Object.Instantiate(_assetProvider.LoadAsset(AssetPath.PlayAreaPath));
             return playAreaPrefab;
         }

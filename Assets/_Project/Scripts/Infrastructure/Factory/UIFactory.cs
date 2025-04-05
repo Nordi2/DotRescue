@@ -1,4 +1,5 @@
-﻿using _Project.Scripts.Gameplay.Interfaces;
+﻿using System;
+using _Project.Scripts.Gameplay.Interfaces;
 using _Project.Scripts.Gameplay.PauseText;
 using _Project.Scripts.Gameplay.PopupScoring;
 using _Project.Scripts.Gameplay.Score;
@@ -6,7 +7,9 @@ using _Project.Scripts.Gameplay.UI.View;
 using _Project.Scripts.Infrastructure.AssetManagement;
 using _Project.Scripts.Infrastructure.Services.GameLoop;
 using _Project.Scripts.Infrastructure.Services.Input;
+using DebugToolsPlus;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace _Project.Scripts.Infrastructure.Factory
 {
@@ -35,6 +38,8 @@ namespace _Project.Scripts.Infrastructure.Factory
 
         public PopupScoringView CreatePopupScoring(IGameOverEvent gameOverEvent, StorageScore storageScore)
         {
+            D.Log("CREATED UI", "Popup_Scoring", DColor.BLUE,true);
+            
             GameObject popupScoring = Object.Instantiate(_assetProvider.LoadAsset(PopupScoringPath), _uiRoot);
 
             var view = popupScoring.GetComponent<PopupScoringView>();
@@ -47,6 +52,8 @@ namespace _Project.Scripts.Infrastructure.Factory
 
         public PauseTextView CreateInitialPauseText()
         {
+            D.Log("CREATED UI", "Pause_Text", DColor.BLUE,true);
+            
             GameObject uiText = Object.Instantiate(_assetProvider.LoadAsset(InitialPauseTextPath), _uiRoot);
 
             PauseTextView view = uiText.GetComponent<PauseTextView>();
@@ -57,7 +64,11 @@ namespace _Project.Scripts.Infrastructure.Factory
             return view;
         }
 
-        public void CreateUIRoot() =>
+        public void CreateUIRoot()
+        {
+            D.Log("CREATED UI", "UI_Root", DColor.BLUE,true);
+            
             _uiRoot = Object.Instantiate(_assetProvider.LoadAsset(UIRootPath).transform);
+        }
     }
 }
