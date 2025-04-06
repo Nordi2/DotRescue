@@ -13,7 +13,7 @@ namespace _Project.Scripts.Infrastructure.Services.GameLoop
         private readonly List<IGameStartListener> _listStarteable = new();
         private readonly List<IGameFinishListener> _listFinishable = new();
         private readonly List<IDisposable> _listDisposables = new();
-        
+                
         public void AddListener(IGameListener listener)
         {
             CheckTypeAndAddInList(listener);
@@ -39,7 +39,6 @@ namespace _Project.Scripts.Infrastructure.Services.GameLoop
             
             Dispose();
         }
-        
         
         private void Update()
         {

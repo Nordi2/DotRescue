@@ -1,8 +1,8 @@
 using _Project.Scripts.Infrastructure.AssetManagement;
 using _Project.Scripts.Infrastructure.Factory;
 using _Project.Scripts.Infrastructure.Services;
-using _Project.Scripts.Infrastructure.Services.GameLoop;
-using _Project.Scripts.Infrastructure.Services.Input;
+using _Project.Scripts.Infrastructure.Services.PersistentProgress;
+using _Project.Scripts.Infrastructure.Services.SaveLoad;
 using _Project.Scripts.Infrastructure.Services.StaticData;
 using UnityEngine;
 
@@ -12,7 +12,6 @@ namespace _Project.Scripts.Infrastructure.States
         IState
     {
         private const string Bootstrap = "Bootstrap";
-        private const string GameLoop = "[GameLoopService]";
 
         private readonly GameStateMachine _stateMachine;
         private readonly SceneLoader _sceneLoader;
@@ -42,19 +41,24 @@ namespace _Project.Scripts.Infrastructure.States
 
         private void EnterLoadLevel()
         {
-            _stateMachine.Enter<MainMenuState>();
+            _stateMachine.Enter<LoadProgressState>();
         }
 
         private void RegisterServices()
         {
             RegisterStaticData();
             
+            _services.RegisterSingle<IPersistentProgressService>(new PersistentProgressService());
             _services.RegisterSingle<IGameStateMachine>(_stateMachine);
             _services.RegisterSingle<IAssetProvider>(new AssetProvider());
             _services.RegisterSingle<IGameFactory>(new GameFactory(
                 _services.Single<IAssetProvider>(),
                 _services.Single<IStaticDataService>()));
 
+            _services.RegisterSingle<ISaveLoadService>(new SaveLoadService(
+                _services.Single<IGameFactory>(),
+                _services.Single<IPersistentProgressService>()));
+            
             _services.RegisterSingle<IUIFactory>(new UIFactory(
                 _services.Single<IAssetProvider>(),
                 _services.Single<IGameStateMachine>()));

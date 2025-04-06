@@ -6,7 +6,8 @@ using UnityEngine;
 namespace _Project.Scripts.Gameplay.Player
 {
     public class PlayerFacade : MonoBehaviour,
-        IDieble,IGameOverEvent
+        IDieble,
+        IGameOverEvent
     {
         public event Action OnGameOver;
 

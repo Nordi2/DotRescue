@@ -1,4 +1,5 @@
-﻿using _Project.Scripts.Gameplay.Interfaces;
+﻿using System.Collections.Generic;
+using _Project.Scripts.Gameplay.Interfaces;
 using _Project.Scripts.Gameplay.PauseText;
 using _Project.Scripts.Gameplay.PopupScoring;
 using _Project.Scripts.Gameplay.Score;
@@ -6,6 +7,7 @@ using _Project.Scripts.Gameplay.UI.View;
 using _Project.Scripts.Infrastructure.AssetManagement;
 using _Project.Scripts.Infrastructure.Services.GameLoop;
 using _Project.Scripts.Infrastructure.Services.Input;
+using _Project.Scripts.Infrastructure.Services.PersistentProgress;
 using _Project.Scripts.MainMenu;
 using DebugToolsPlus;
 using UnityEngine;
@@ -30,6 +32,8 @@ namespace _Project.Scripts.Infrastructure.Factory
             _assetProvider = assetProvider;
             _stateMachine = stateMachine;
         }
+
+        public List<ILoadProgress> LoadProgresses { get; } = new();
 
         public PopupScoringView CreatePopupScoring(IGameOverEvent gameOverEvent, StorageScore storageScore,IGameLoopService gameLoopService)
         {
@@ -67,6 +71,8 @@ namespace _Project.Scripts.Infrastructure.Factory
 
             MainMenuView view = mainMenu.GetComponent<MainMenuView>();
             MainMenuPresenter presenter = new MainMenuPresenter(view, _stateMachine);
+            
+            LoadProgresses.Add(presenter);
         }
 
         public void CreateUIRoot()
@@ -85,6 +91,11 @@ namespace _Project.Scripts.Infrastructure.Factory
                 canvas.worldCamera = Camera.main;
                 canvas.sortingLayerName = SortingLayerUI;
             }
+        }
+
+        public void CleanUp()
+        {
+            LoadProgresses.Clear();
         }
     }
 }

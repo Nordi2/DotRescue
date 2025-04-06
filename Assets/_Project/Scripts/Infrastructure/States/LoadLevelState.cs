@@ -10,6 +10,8 @@ namespace _Project.Scripts.Infrastructure.States
     public class LoadLevelState :
         IPayloadedState<string>
     {
+        private const string GameLoop = "[GameLoopService]";
+        
         private IGameOverEvent _gameOverEvent;
         private IInputService _inputService;
         private IGameLoopService _gameLoopService;
@@ -19,7 +21,7 @@ namespace _Project.Scripts.Infrastructure.States
         private readonly LoadingCurtain _curtain;
         private readonly IGameFactory _gameFactory;
         private readonly IUIFactory _uiFactory;
-
+        
         public LoadLevelState(
             GameStateMachine stateMachine,
             SceneLoader sceneLoader,
@@ -37,11 +39,14 @@ namespace _Project.Scripts.Infrastructure.States
         public void Enter(string sceneName)
         {
             _curtain.Show();
+            _gameFactory.CleanUp();
             _sceneLoader.Load(sceneName, OnLoaded);
         }
 
-        public void Exit() =>
+        public void Exit()
+        {
             _curtain.Hide();
+        }
 
         private void OnLoaded()
         {

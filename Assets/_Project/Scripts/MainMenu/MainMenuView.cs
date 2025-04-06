@@ -18,6 +18,9 @@ namespace _Project.Scripts.MainMenu
             _statrGameButton.onClick.AddListener(_action);
         }
 
+        public void UpdateTextScore(string newText) => 
+            _textScore.text = newText;
+
         private void OnDestroy()
         {
             _statrGameButton.onClick.RemoveListener(_action);

@@ -1,12 +1,16 @@
 ﻿using System;
+using _Project.Scripts.Data;
 using _Project.Scripts.Infrastructure.Services.GameLoop;
+using _Project.Scripts.Infrastructure.Services.PersistentProgress;
+using UnityEngine;
 
 namespace _Project.Scripts.Gameplay.Score
 {
     public class StorageScore :
         IGameUpdateListener,
         IGameStartListener,
-        IGameFinishListener
+        IGameFinishListener,
+        ISavedProgress
     {
         public event Action<int> OnScoreChanged;
 
@@ -41,16 +45,22 @@ namespace _Project.Scripts.Gameplay.Score
         {
             if (_isPauseGame)
                 return;
-            
+
             CurrentScore += _scoreSpeed * deltaTime;
             CheckScore();
+        }
+
+        void ISavedProgress.UpdateProgress(PlayerProgress progress)
+        {
+            if (_oldScore >= progress.ScoreData.Score)
+                progress.ScoreData.Score = _oldScore;
         }
 
         private void CheckScore()
         {
             if (!(CurrentScore >= _oldScore + 1))
                 return;
-            
+
             _oldScore = (int)CurrentScore;
             OnScoreChanged?.Invoke((int)CurrentScore);
         }

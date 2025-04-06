@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using _Project.Scripts.Infrastructure.Factory;
 using _Project.Scripts.Infrastructure.Services;
+using _Project.Scripts.Infrastructure.Services.PersistentProgress;
+using _Project.Scripts.Infrastructure.Services.SaveLoad;
 using _Project.Scripts.Infrastructure.States;
 using DebugToolsPlus;
 
@@ -18,9 +20,10 @@ namespace _Project.Scripts.Infrastructure
             _states = new Dictionary<Type, IExitableState>()
             {
                 [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader, services),
-                [typeof(MainMenuState)] = new MainMenuState(curtain,sceneLoader,services.Single<IUIFactory>()),
+                [typeof(LoadProgressState)] = new LoadProgressState(this,services.Single<ISaveLoadService>(),services.Single<IPersistentProgressService>()),
+                [typeof(MainMenuState)] = new MainMenuState(curtain,sceneLoader,services.Single<IUIFactory>(),services.Single<IPersistentProgressService>()),
                 [typeof(LoadLevelState)] = new LoadLevelState(this,sceneLoader,curtain,services.Single<IGameFactory>(),services.Single<IUIFactory>()),
-                [typeof(GameLoopState)] = new GameLoopState(this)
+                [typeof(GameLoopState)] = new GameLoopState(this,services.Single<ISaveLoadService>())
             };
         }
 
