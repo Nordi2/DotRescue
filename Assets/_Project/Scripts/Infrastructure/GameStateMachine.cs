@@ -7,7 +7,8 @@ using DebugToolsPlus;
 
 namespace _Project.Scripts.Infrastructure
 {
-    public class GameStateMachine
+    public class GameStateMachine :
+        IGameStateMachine
     {
         private readonly Dictionary<Type, IExitableState> _states;
         private IExitableState _activateState;
@@ -25,7 +26,7 @@ namespace _Project.Scripts.Infrastructure
 
         public void Enter<TState>() where TState : class, IState
         {
-            D.LogWarning("ENTER STATE",  D.FormatText(typeof(TState).Name,DColor.CYAN),DColor.YELLOW);
+            D.LogWarning(GetType().Name.ToUpper(), D.FormatText($"Enter State {typeof(TState).Name}",DColor.RED),DColor.YELLOW);
             
             IState state = ChangeState<TState>();
             state.Enter();
@@ -33,7 +34,7 @@ namespace _Project.Scripts.Infrastructure
 
         public void Enter<TState, TPayload>(TPayload payload) where TState : class, IPayloadedState<TPayload>
         {
-            D.LogWarning("ENTER STATE",  D.FormatText(typeof(TState).Name,DColor.CYAN),DColor.YELLOW);
+            D.LogWarning(GetType().Name.ToUpper(), D.FormatText($"Enter State {typeof(TState).Name}",DColor.RED),DColor.YELLOW);
             
             TState state = ChangeState<TState>();
             state.Enter(payload);

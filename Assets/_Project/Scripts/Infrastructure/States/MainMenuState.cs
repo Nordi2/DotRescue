@@ -5,7 +5,6 @@ namespace _Project.Scripts.Infrastructure.States
     public class MainMenuState :
         IState
     {
-        private const string Gameplay = "Gameplay";
         private const string MainMenu = "MainMenu";
         
         private LoadingCurtain _curtain;

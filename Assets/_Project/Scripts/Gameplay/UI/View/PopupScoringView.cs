@@ -1,6 +1,7 @@
 ﻿using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace _Project.Scripts.Gameplay.UI.View
@@ -10,12 +11,19 @@ namespace _Project.Scripts.Gameplay.UI.View
         [SerializeField] private Button _buttonGoMainMenu;
         [SerializeField] private TextMeshProUGUI _scoreText;
         [SerializeField] private CanvasGroup _bodyCanvasGroup;
-        
+
         private Sequence _animation;
+        private UnityAction _action;
 
         [field: SerializeField] public RectTransform Body { get; private set; }
-        
-        public void ShowPopup(Vector2 targetBodyPosition, Vector2 startShift,int endValue)
+
+        public void ClickExitButton(UnityAction action)
+        {
+            _action = action;
+            _buttonGoMainMenu.onClick.AddListener(_action);
+        }
+
+        public void ShowPopup(Vector2 targetBodyPosition, Vector2 startShift, int endValue)
         {
             gameObject.SetActive(true);
 
@@ -40,7 +48,13 @@ namespace _Project.Scripts.Gameplay.UI.View
                 _animation.Kill();
         }
 
-        private void OnDestroy() => 
+        private void OnDestroy()
+        {
+            if (_action is null)
+                return;
+
+            _buttonGoMainMenu.onClick.RemoveListener(_action);
             KillCurrentAnimationIfActive();
+        }
     }
 }

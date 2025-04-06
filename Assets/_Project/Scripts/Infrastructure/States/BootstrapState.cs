@@ -48,27 +48,16 @@ namespace _Project.Scripts.Infrastructure.States
         private void RegisterServices()
         {
             RegisterStaticData();
-            IGameLoopService gameLoopService = RegisterGameLoop();
-            IInputService inputService = new InputService();
             
-            _services.RegisterSingle(gameLoopService);
-            _services.RegisterSingle(inputService);
+            _services.RegisterSingle<IGameStateMachine>(_stateMachine);
             _services.RegisterSingle<IAssetProvider>(new AssetProvider());
             _services.RegisterSingle<IGameFactory>(new GameFactory(
                 _services.Single<IAssetProvider>(),
-                _services.Single<IStaticDataService>(),
-                _services.Single<IGameLoopService>(),
-                _services.Single<IInputService>()));
+                _services.Single<IStaticDataService>()));
 
             _services.RegisterSingle<IUIFactory>(new UIFactory(
                 _services.Single<IAssetProvider>(),
-                _services.Single<IInputService>(),
-                _services.Single<IGameLoopService>()));
-            
-            gameLoopService.AddListener(inputService);
-
-            _services.RegisterSingle(inputService);
-            _services.RegisterSingle(gameLoopService);
+                _services.Single<IGameStateMachine>()));
         }
 
         private void RegisterStaticData()
@@ -76,13 +65,6 @@ namespace _Project.Scripts.Infrastructure.States
             IStaticDataService staticDataService = new StaticDataService();
             staticDataService.LoadStaticData();
             _services.RegisterSingle(staticDataService);
-        }
-
-        private IGameLoopService RegisterGameLoop()
-        {
-            GameLoopService gameLoopService = new GameObject(GameLoop).AddComponent<GameLoopService>();
-            Object.DontDestroyOnLoad(gameLoopService.gameObject);
-            return gameLoopService;
         }
     }
 }

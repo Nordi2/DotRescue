@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using DebugToolsPlus;
 using UnityEngine;
 
 namespace _Project.Scripts.Infrastructure.Services.GameLoop
@@ -13,34 +14,45 @@ namespace _Project.Scripts.Infrastructure.Services.GameLoop
         private readonly List<IGameFinishListener> _listFinishable = new();
         private readonly List<IDisposable> _listDisposables = new();
         
-        public void AddListener(IGameListener listener) =>
+        public void AddListener(IGameListener listener)
+        {
             CheckTypeAndAddInList(listener);
+        }
 
         public void AddDisposable(IDisposable disposable) =>
             _listDisposables.Add(disposable);
 
         public void OnStartGame()
         {
+            D.Log(GetType().Name.ToUpper(),"START-GAME",DColor.MAGENTA,true);
+            
             foreach (IGameStartListener startListener in _listStarteable)
                 startListener.StartGame();
         }
 
         public void OnFinishGame()
         {
+            D.Log(GetType().Name.ToUpper(),"FINISH-GAME",DColor.MAGENTA,true);
+            
             foreach (IGameFinishListener finishListener in _listFinishable)
                 finishListener.FinishGame();
             
             Dispose();
         }
         
+        
         private void Update()
         {
+           D.Log(GetType().Name.ToUpper(),"UPDATE",DColor.MAGENTA,true);
+           
             foreach (IGameUpdateListener updatable in _listUpdateable)
                 updatable.Update(Time.deltaTime);
         }
 
         private void FixedUpdate()
         {
+            D.Log(GetType().Name.ToUpper(),"FIXED-UPDATE",DColor.MAGENTA,true);
+            
             foreach (IGameFixedListener fixedUpdatable in _listFixedUpdateable)
                 fixedUpdatable.FixedUpdate(Time.fixedDeltaTime);
         }
@@ -50,6 +62,8 @@ namespace _Project.Scripts.Infrastructure.Services.GameLoop
 
         private void Dispose()
         {
+            D.Log(GetType().Name.ToUpper(),"DISPOSE",DColor.MAGENTA,true);
+            
             foreach (IDisposable disposable in _listDisposables)
                 disposable.Dispose();
         }

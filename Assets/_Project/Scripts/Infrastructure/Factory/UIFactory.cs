@@ -6,6 +6,7 @@ using _Project.Scripts.Gameplay.UI.View;
 using _Project.Scripts.Infrastructure.AssetManagement;
 using _Project.Scripts.Infrastructure.Services.GameLoop;
 using _Project.Scripts.Infrastructure.Services.Input;
+using _Project.Scripts.MainMenu;
 using DebugToolsPlus;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -15,62 +16,75 @@ namespace _Project.Scripts.Infrastructure.Factory
     public class UIFactory :
         IUIFactory
     {
-        private readonly IInputService _inputService;
-        private readonly IAssetProvider _assetProvider;
-        private readonly IGameLoopService _gameLoopService;
+        private const string SortingLayerUI = "UI";
         
+        private readonly IAssetProvider _assetProvider;
+        private readonly IGameStateMachine _stateMachine;
+
         private Transform _uiRoot;
 
         public UIFactory(
             IAssetProvider assetProvider,
-            IInputService inputService,
-            IGameLoopService gameLoopService)
+            IGameStateMachine stateMachine)
         {
             _assetProvider = assetProvider;
-            _inputService = inputService;
-            _gameLoopService = gameLoopService;
+            _stateMachine = stateMachine;
         }
 
-        public PopupScoringView CreatePopupScoring(IGameOverEvent gameOverEvent, StorageScore storageScore)
+        public PopupScoringView CreatePopupScoring(IGameOverEvent gameOverEvent, StorageScore storageScore,IGameLoopService gameLoopService)
         {
-            D.Log("CREATED UI", "Popup_Scoring", DColor.BLUE,true);
-            
+            D.Log(GetType().Name, D.FormatText("CREATED UI: Popup_Scoring",DColor.GREEN),DColor.YELLOW);
+
             GameObject popupScoring = Object.Instantiate(_assetProvider.LoadAsset(AssetPath.PopupScoringPath), _uiRoot);
 
             var view = popupScoring.GetComponent<PopupScoringView>();
-            PopupScoringPresenter presenter = new PopupScoringPresenter(view, gameOverEvent, storageScore);
+            PopupScoringPresenter presenter = new PopupScoringPresenter(view, gameOverEvent, storageScore,_stateMachine);
 
-            _gameLoopService.AddListener(presenter);
-            
+            gameLoopService.AddListener(presenter);
+
             return popupScoring.GetComponent<PopupScoringView>();
         }
 
-        public PauseTextView CreateInitialPauseText()
+        public PauseTextView CreateInitialPauseText(IInputService inputService,IGameLoopService gameLoopService)
         {
-            D.Log("CREATED UI", "Pause_Text", DColor.BLUE,true);
-            
+            D.Log(GetType().Name, D.FormatText("CREATED UI: Pause_Text",DColor.GREEN),DColor.YELLOW);
+
             GameObject uiText = Object.Instantiate(_assetProvider.LoadAsset(AssetPath.InitialPauseTextPath), _uiRoot);
 
             PauseTextView view = uiText.GetComponent<PauseTextView>();
-            PauseTextPresenter presenter = new PauseTextPresenter(view, _inputService);
-            
-            _gameLoopService.AddListener(presenter);
-            
+            PauseTextPresenter presenter = new PauseTextPresenter(view, inputService);
+
+            gameLoopService.AddListener(presenter);
+
             return view;
         }
 
         public void CreateMainMenu()
         {
-            D.Log("CREATED UI", "Main_Menu", DColor.BLUE,true);
-            
-            var mainMenu = Object.Instantiate(_assetProvider.LoadAsset(AssetPath.MainMenuPath), _uiRoot);
+            D.Log(GetType().Name, D.FormatText("CREATED UI: Main_Menu",DColor.GREEN),DColor.YELLOW);
+
+            GameObject mainMenu = Object.Instantiate(_assetProvider.LoadAsset(AssetPath.MainMenuPath), _uiRoot);
+
+            MainMenuView view = mainMenu.GetComponent<MainMenuView>();
+            MainMenuPresenter presenter = new MainMenuPresenter(view, _stateMachine);
         }
 
         public void CreateUIRoot()
         {
-            D.Log("CREATED UI", "UI_Root", DColor.BLUE,true);
+            D.Log(GetType().Name, D.FormatText("CREATED UI: UI_Root",DColor.GREEN),DColor.YELLOW);
             
             _uiRoot = Object.Instantiate(_assetProvider.LoadAsset(AssetPath.UIRootPath).transform);
+            
+            SettingCanvas();
+            
+            void SettingCanvas()
+            {
+                Canvas canvas = _uiRoot.GetComponent<Canvas>();
+                
+                canvas.renderMode = RenderMode.ScreenSpaceCamera;
+                canvas.worldCamera = Camera.main;
+                canvas.sortingLayerName = SortingLayerUI;
+            }
         }
     }
 }

@@ -1,7 +1,9 @@
 ﻿using _Project.Scripts.Gameplay.Interfaces;
 using _Project.Scripts.Gameplay.Score;
 using _Project.Scripts.Gameplay.UI.View;
+using _Project.Scripts.Infrastructure;
 using _Project.Scripts.Infrastructure.Services.GameLoop;
+using _Project.Scripts.Infrastructure.States;
 using UnityEngine;
 
 namespace _Project.Scripts.Gameplay.PopupScoring
@@ -13,6 +15,7 @@ namespace _Project.Scripts.Gameplay.PopupScoring
         private PopupScoringView _view;
         private IGameOverEvent _gameOverEvent;
         private StorageScore _storageScore;
+        private IGameStateMachine _stateMachine;
         
         private Vector2 _targetBodyPosition;
         private Vector2 _startShift;
@@ -20,11 +23,13 @@ namespace _Project.Scripts.Gameplay.PopupScoring
         public PopupScoringPresenter(
             PopupScoringView view,
             IGameOverEvent gameOverEvent,
-            StorageScore storageScore)
+            StorageScore storageScore,
+            IGameStateMachine stateMachine)
         {
             _view = view;
             _gameOverEvent = gameOverEvent;
             _storageScore = storageScore;
+            _stateMachine = stateMachine;
         }
 
         void IGameStartListener.StartGame()
@@ -32,11 +37,15 @@ namespace _Project.Scripts.Gameplay.PopupScoring
             _targetBodyPosition = _view.Body.anchoredPosition;
             _startShift = new Vector2(_targetBodyPosition.x, -Screen.height / 2);
             
+            _view.ClickExitButton(GoToMainMenuScene);
             _gameOverEvent.OnGameOver += ShowPopup;
         }
 
         void IGameFinishListener.FinishGame() => 
             _gameOverEvent.OnGameOver -= ShowPopup;
+
+        private void GoToMainMenuScene() => 
+            _stateMachine.Enter<MainMenuState>();
 
         private void ShowPopup()
         {

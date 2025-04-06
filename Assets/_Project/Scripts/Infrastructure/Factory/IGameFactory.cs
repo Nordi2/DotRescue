@@ -2,6 +2,8 @@
 using _Project.Scripts.Gameplay.Player;
 using _Project.Scripts.Gameplay.Score;
 using _Project.Scripts.Infrastructure.Services;
+using _Project.Scripts.Infrastructure.Services.GameLoop;
+using _Project.Scripts.Infrastructure.Services.Input;
 using UnityEngine;
 
 namespace _Project.Scripts.Infrastructure.Factory
@@ -16,5 +18,7 @@ namespace _Project.Scripts.Infrastructure.Factory
         PlayerFacade CreatePlayer();
         GameObject CreateObstacle();
         GameObject CreatePlayArea();
+        IInputService CreateInputService();
+        IGameLoopService CreateGameLoopService();
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using _Project.Scripts.Gameplay.Interfaces;
+﻿using _Project.Scripts.Gameplay.Interfaces;
 using _Project.Scripts.Gameplay.Obstacle;
 using _Project.Scripts.Gameplay.Player;
 using _Project.Scripts.Gameplay.Score;
@@ -18,29 +17,46 @@ namespace _Project.Scripts.Infrastructure.Factory
     public class GameFactory :
         IGameFactory
     {
+        private const string GameLoop = "[GameLoopService]";
+        
         private readonly IAssetProvider _assetProvider;
         private readonly IStaticDataService _staticDataService;
-        private readonly IGameLoopService _gameLoopService;
-        private readonly IInputService _inputService;
 
-        public StorageScore StorageScore { get; private set; }
-
+        private IGameLoopService _gameLoopService;
+        private IInputService _inputService;
+        
         public GameFactory(
             IAssetProvider assetProvider,
-            IStaticDataService staticDataService,
-            IGameLoopService gameLoopService,
-            IInputService inputService)
+            IStaticDataService staticDataService)
         {
             _assetProvider = assetProvider;
             _staticDataService = staticDataService;
-            _gameLoopService = gameLoopService;
-            _inputService = inputService;
+        }
+
+        public StorageScore StorageScore { get; private set; }
+
+        public IInputService CreateInputService()
+        {
+            D.Log(GetType().Name.ToUpper(), D.FormatText("CREATED INFRASTRUCTURE: Input_Service",DColor.GREEN),DColor.YELLOW);
+            
+            _inputService = new InputService();
+
+            return _inputService;
+        }
+
+        public IGameLoopService CreateGameLoopService()
+        {
+            D.Log(GetType().Name.ToUpper(), D.FormatText("CREATED INFRASTRUCTURE: Gameloop_Service",DColor.GREEN),DColor.YELLOW);
+            
+            _gameLoopService = new GameObject(GameLoop).AddComponent<GameLoopService>();
+
+            return _gameLoopService;
         }
 
         public void CreateGameLoopController(IGameOverEvent gameOverEvent)
         {
-            D.Log("CREATED INFRASTRUCTURE", "Gameloop_Controller", DColor.RED,true);
-            
+            D.Log(GetType().Name, D.FormatText("CREATED INFRASTRUCTURE: Gameloop_Controller",DColor.GREEN),DColor.YELLOW);
+
             GameLoopController gameLoopController = new GameLoopController(
                 _inputService,
                 _gameLoopService,
@@ -51,35 +67,35 @@ namespace _Project.Scripts.Infrastructure.Factory
 
         public GameObject CreateHud()
         {
-            D.Log("CREATED WORLD OBJECT", "Hud", DColor.GREEN,true);
-            
+            D.Log(GetType().Name.ToUpper(), D.FormatText("CREATED WORLD OBJECT: Hud",DColor.GREEN),DColor.YELLOW);
+
             GameObject hudPrefab = Object.Instantiate(_assetProvider.LoadAsset(AssetPath.HudPath));
-            
+
             SettingCanvas();
             ScoreConfig scoreConfig = _staticDataService.GetData<ScoreConfig>();
-            
+
             TextScoreView textScoreView = hudPrefab.GetComponent<TextScoreView>();
             StorageScore = new StorageScore(scoreConfig.AddedScore, scoreConfig.InitialScore);
 
             ScorePresenter scorePresenter = new ScorePresenter(StorageScore, textScoreView);
-            
+
             void SettingCanvas()
             {
                 Canvas canvas = hudPrefab.GetComponent<Canvas>();
                 canvas.renderMode = RenderMode.ScreenSpaceCamera;
-                canvas.worldCamera = Camera.main; 
+                canvas.worldCamera = Camera.main;
             }
 
             _gameLoopService.AddListener(scorePresenter);
             _gameLoopService.AddListener(StorageScore);
-            
+
             return hudPrefab;
         }
 
         public PlayerFacade CreatePlayer()
         {
-            D.Log("CREATED WORLD OBJECT", "Player", DColor.GREEN,true);
-            
+            D.Log(GetType().Name.ToUpper(), D.FormatText("CREATED WORLD OBJECT: Player",DColor.GREEN),DColor.YELLOW);
+
             GameObject playerPrefab = Object.Instantiate(_assetProvider.LoadAsset(AssetPath.PlayerPath));
 
             PlayerConfig config = _staticDataService.GetData<PlayerConfig>();
@@ -100,8 +116,8 @@ namespace _Project.Scripts.Infrastructure.Factory
 
         public GameObject CreateObstacle()
         {
-            D.Log("CREATED WORLD OBJECT", "Obstacle", DColor.GREEN,true);
-            
+            D.Log(GetType().Name.ToUpper(), D.FormatText("CREATED WORLD OBJECT: Obstacle",DColor.GREEN),DColor.YELLOW);
+
             GameObject obstaclePrefab = Object.Instantiate(_assetProvider.LoadAsset(AssetPath.ObstaclePath));
 
             ObstacleConfig config = _staticDataService.GetData<ObstacleConfig>();
@@ -121,8 +137,8 @@ namespace _Project.Scripts.Infrastructure.Factory
 
         public GameObject CreatePlayArea()
         {
-            D.Log("CREATED WORLD OBJECT", "Play_Area", DColor.GREEN,true);
-            
+            D.Log(GetType().Name.ToUpper(), D.FormatText("CREATED WORLD OBJECT: Play_Area",DColor.GREEN),DColor.YELLOW);
+
             GameObject playAreaPrefab = Object.Instantiate(_assetProvider.LoadAsset(AssetPath.PlayAreaPath));
             return playAreaPrefab;
         }
