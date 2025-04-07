@@ -1,5 +1,4 @@
 ﻿using _Project.Scripts.Gameplay.Interfaces;
-using _Project.Scripts.Gameplay.Player;
 using UnityEngine;
 
 namespace _Project.Scripts.Gameplay.Obstacle

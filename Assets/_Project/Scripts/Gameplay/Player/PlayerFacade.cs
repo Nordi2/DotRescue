@@ -12,8 +12,7 @@ namespace _Project.Scripts.Gameplay.Player
         public event Action OnGameOver;
 
         private SpawnDieEffect _spawnDieEffect;
-
-
+        
         public void Construct(SpawnDieEffect spawnDieEffect)
         {
             _spawnDieEffect = spawnDieEffect;

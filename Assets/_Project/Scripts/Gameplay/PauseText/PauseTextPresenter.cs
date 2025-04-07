@@ -7,8 +7,8 @@ namespace _Project.Scripts.Gameplay.PauseText
     public class PauseTextPresenter :
         IGameFinishListener
     {
-        private IInputService _inputService;
-        private PauseTextView _pauseTextView;
+        private readonly IInputService _inputService;
+        private readonly PauseTextView _pauseTextView;
         
         public PauseTextPresenter(
             PauseTextView pauseTextView,

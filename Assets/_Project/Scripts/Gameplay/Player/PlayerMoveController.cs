@@ -1,5 +1,4 @@
-﻿using System;
-using _Project.Scripts.Gameplay.Interfaces;
+﻿using _Project.Scripts.Gameplay.Interfaces;
 using _Project.Scripts.Infrastructure.Services.GameLoop;
 using _Project.Scripts.Infrastructure.Services.Input;
 

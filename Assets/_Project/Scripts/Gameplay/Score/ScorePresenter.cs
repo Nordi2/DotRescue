@@ -8,8 +8,8 @@ namespace _Project.Scripts.Gameplay.Score
         IGameStartListener,
         IGameFinishListener
     {
-        private StorageScore _storageScore;
-        private TextScoreView _textScoreView;
+        private readonly StorageScore _storageScore;
+        private readonly TextScoreView _textScoreView;
 
         public ScorePresenter(
             StorageScore storageScore,

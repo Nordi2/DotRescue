@@ -21,7 +21,7 @@ namespace _Project.Scripts.Infrastructure
         public void Hide()
         {
             _canvasGroup
-                .DOFade(0, 1f)
+                .DOFade(0, 0.5f)
                 .OnComplete(() => gameObject.SetActive(false));
         }
     }

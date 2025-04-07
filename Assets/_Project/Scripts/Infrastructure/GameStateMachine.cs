@@ -19,11 +19,32 @@ namespace _Project.Scripts.Infrastructure
         {
             _states = new Dictionary<Type, IExitableState>()
             {
-                [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader, services),
-                [typeof(LoadProgressState)] = new LoadProgressState(this,services.Single<ISaveLoadService>(),services.Single<IPersistentProgressService>()),
-                [typeof(MainMenuState)] = new MainMenuState(curtain,sceneLoader,services.Single<IUIFactory>(),services.Single<IPersistentProgressService>()),
-                [typeof(LoadLevelState)] = new LoadLevelState(this,sceneLoader,curtain,services.Single<IGameFactory>(),services.Single<IUIFactory>()),
-                [typeof(GameLoopState)] = new GameLoopState(this,services.Single<ISaveLoadService>())
+                [typeof(BootstrapState)] = new BootstrapState(
+                    this,
+                    sceneLoader,
+                    services),
+                
+                [typeof(LoadProgressState)] = new LoadProgressState(
+                    this,
+                    services.Single<ISaveLoadService>(),
+                    services.Single<IPersistentProgressService>()),
+                
+                [typeof(MainMenuState)] = new MainMenuState(
+                    curtain,
+                    sceneLoader,
+                    services.Single<IUIFactory>(),
+                    services.Single<IPersistentProgressService>()),
+                
+                [typeof(LoadLevelState)] = new LoadLevelState(
+                    this,
+                    sceneLoader,
+                    curtain,
+                    services.Single<IGameFactory>(),
+                    services.Single<IUIFactory>()),
+                
+                [typeof(GameLoopState)] = new GameLoopState(
+                    this,
+                    services.Single<ISaveLoadService>())
             };
         }
 

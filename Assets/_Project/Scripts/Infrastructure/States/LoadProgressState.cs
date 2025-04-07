@@ -2,7 +2,6 @@ using _Project.Scripts.Data;
 using _Project.Scripts.Infrastructure.Services.PersistentProgress;
 using _Project.Scripts.Infrastructure.Services.SaveLoad;
 using DebugToolsPlus;
-using UnityEngine;
 
 namespace _Project.Scripts.Infrastructure.States
 {

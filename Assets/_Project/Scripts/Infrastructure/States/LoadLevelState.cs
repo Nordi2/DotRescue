@@ -10,8 +10,6 @@ namespace _Project.Scripts.Infrastructure.States
     public class LoadLevelState :
         IPayloadedState<string>
     {
-        private const string GameLoop = "[GameLoopService]";
-        
         private IGameOverEvent _gameOverEvent;
         private IInputService _inputService;
         private IGameLoopService _gameLoopService;

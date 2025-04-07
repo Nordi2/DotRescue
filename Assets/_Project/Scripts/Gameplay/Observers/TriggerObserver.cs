@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace _Project.Scripts.Gameplay
+namespace _Project.Scripts.Gameplay.Observers
 {
     public class TriggerObserver<T> : MonoBehaviour
     {

@@ -12,13 +12,13 @@ namespace _Project.Scripts.Gameplay.PopupScoring
         IGameStartListener,
         IGameFinishListener
     {
-        private PopupScoringView _view;
-        private IGameOverEvent _gameOverEvent;
-        private StorageScore _storageScore;
-        private IGameStateMachine _stateMachine;
-        
         private Vector2 _targetBodyPosition;
         private Vector2 _startShift;
+        
+        private readonly PopupScoringView _view;
+        private readonly IGameOverEvent _gameOverEvent;
+        private readonly StorageScore _storageScore;
+        private readonly IGameStateMachine _stateMachine;
 
         public PopupScoringPresenter(
             PopupScoringView view,
