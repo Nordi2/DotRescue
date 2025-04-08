@@ -13,18 +13,18 @@
 
 ### MainMenu
 
-<p align="left">
-      <img src="https://i.ibb.co/hJ5cPMmg/Screnshot-Main-Menu.png" alt="Project Logo" width="128">
-</p>
+<div style="display: flex; gap: 10px; flex-wrap: wrap;">
+  <img src="https://i.ibb.co/hJ5cPMmg/Screnshot-Main-Menu.png" alt="MainMenu" style="width: 128px;">
+</div>
+
 
 ### Gameplay
 
-<p align="left">
-      <img src="https://i.ibb.co/gZpfXXtJ/Screnshot-Gameplay-3.png" alt="Screnshot-Gameplay-3" border="0">
-      <img src="https://i.ibb.co/gL6wQSnw/Screnshot-Gameplay-1.png" alt="Project Logo" width="128">
-      <img src="https://i.ibb.co/kg6j1w95/Screnshot-Gameplay-2.png" alt="Project Logo" width="128">
-      <img src="https://ibb.co/DDghpv8z" alt="Project Logo" width="128">
-</p>
+<div style="display: flex; gap: 10px; flex-wrap: wrap;">
+  <img src="https://i.ibb.co/gL6wQSnw/Screnshot-Gameplay-1.png" alt="Screnshot1" style="width: 128px;">
+  <img src="https://i.ibb.co/kg6j1w95/Screnshot-Gameplay-2.png" alt="Screnshot2" style="width: 128px;">
+  <img src="https://i.ibb.co/gZpfXXtJ/Screnshot-Gameplay-3.png" alt="Screnshot3" style="width: 128px;">
+</div>
 
 ## Gameplay
 ## Reference
