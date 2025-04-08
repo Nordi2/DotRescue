@@ -1,5 +1,5 @@
 <p align="center">
-      <img src="https://i.ibb.co/ds6rBpp4/Game-Icon.png" alt="Project Logo" width="512">
+      <img src="https://i.ibb.co/ds6rBpp4/Game-Icon.png" alt="Project Logo" width="1080">
 </p>
 
 ## Input
@@ -30,7 +30,9 @@
 
 ## Gameplay
 
-<img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExbWJmOWZ1MGZwOWlwMzlldWI2bGlteWY5ZHJ5dDYwejJicGV2eGZmbyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/kGTVpzZN86B1LNmuiS/giphy.gif" alt="Gameplay_Gif_" width="400"/>
+<p align="center">
+      <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExbWJmOWZ1MGZwOWlwMzlldWI2bGlteWY5ZHJ5dDYwejJicGV2eGZmbyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/kGTVpzZN86B1LNmuiS/giphy.gif" alt="Gameplay_gif_" width="400">
+</p>
 
 ## Reference
 
