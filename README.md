@@ -22,7 +22,7 @@
 <p align="left">
       <img src="https://i.ibb.co/gL6wQSnw/Screnshot-Gameplay-1.png" alt="Project Logo" width="128">
       <img src="https://i.ibb.co/kg6j1w95/Screnshot-Gameplay-2.png" alt="Project Logo" width="128">
-      <img src="https://i.ibb.co/gZpfXXtJ/Screnshot-Gameplay-3.png" alt="Project Logo" width="128">
+      <img src="https://ibb.co/DDghpv8z" alt="Project Logo" width="128">
 </p>
 
 ## Gameplay
