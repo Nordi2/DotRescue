@@ -4,7 +4,7 @@
 
 <p align="center">
     <img src="https://img.shields.io/badge/Unity-2022.3.29f1-47a1f5?style=flat&logo=unity&logoColor=white">
-
+      ![Static Badge](https://img.shields.io/badge/Unity-2022.3.29f1-yellow?style=plastic&logo=Unity&logoColor=yellow&logoSize=auto&labelColor=black)
 </p>
 
 ## Input
@@ -41,4 +41,4 @@
 
 ## Reference
 
-[![Èãðàòü íà itch.io](https://img.shields.io/badge/Itch.io-Play_Now-FA5C5C?style=for-the-badge&logo=itch.io)](https://igorchek.itch.io/dot-rescue)
+[![ÃˆÃ£Ã°Ã Ã²Ã¼ Ã­Ã  itch.io](https://img.shields.io/badge/Itch.io-Play_Now-FA5C5C?style=for-the-badge&logo=itch.io)](https://igorchek.itch.io/dot-rescue)
