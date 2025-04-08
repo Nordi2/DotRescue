@@ -24,9 +24,6 @@
 
 <details><summary>Gameplay</summary>
       
-<img src="https://i.ibb.co/kg6j1w95/Screnshot-Gameplay-2.png" alt="Screnshot2" style="width: 256px;">
-
-
 <div style="display: flex; gap: 10px; flex-wrap: wrap;">
   <img src="https://i.ibb.co/gL6wQSnw/Screnshot-Gameplay-1.png" alt="Screnshot1" style="width: 256px;">
   <img src="https://i.ibb.co/kg6j1w95/Screnshot-Gameplay-2.png" alt="Screnshot2" style="width: 256px;">
