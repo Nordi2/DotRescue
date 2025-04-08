@@ -39,6 +39,7 @@ ExportedObj/
 *.suo
 *.tmp
 *.user
+*.idea
 *.userprefs
 *.pidb
 *.booproj

@@ -2,6 +2,11 @@
       <img src="https://i.ibb.co/ds6rBpp4/Game-Icon.png" alt="Project Logo" width="1080">
 </p>
 
+<p align="center">
+    <img src="https://img.shields.io/badge/Unity-2022.3.5f1-000000?style=flat&logo=unity&logoColor=white">
+
+</p>
+
 ## Input
 
 <p align="Left">
