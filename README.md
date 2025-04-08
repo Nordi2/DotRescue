@@ -1,1 +1,1 @@
-![logo](https://ibb.co/vCmH1dd4.webp)
+![logo](https://ibb.co/vCmH1dd4)
