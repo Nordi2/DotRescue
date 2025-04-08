@@ -4,8 +4,8 @@
 
 <p align="center">
     <img src="https://img.shields.io/badge/Unity-2022.3.29f1-47a1f5?style=flat&logo=unity&logoColor=white">
-      ![Static Badge](https://img.shields.io/badge/Unity-2022.3.29f1-yellow?style=plastic&logo=Unity&logoColor=yellow&logoSize=auto&labelColor=black)
 </p>
+      ![Static Badge](https://img.shields.io/badge/Unity-2022.3.29f1-yellow?style=plastic&logo=Unity&logoColor=yellow&logoSize=auto&labelColor=black)
 
 ## Input
 
