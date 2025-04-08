@@ -4,8 +4,8 @@
 
 ## Input
 
-<p align="center">
-      <img src="https://i.ibb.co/5hC29gV0/Screnshot-Settings.png" alt="Settings" width="128">
+<p align="Left">
+      <img src="https://i.ibb.co/5hC29gV0/Screnshot-Settings.png" alt="Settings" width="256">
 </p>
 
 ## Screenshots
@@ -34,4 +34,4 @@
 
 ## Reference
 
-<iframe frameborder="0" src="https://itch.io/embed/3452843?linkback=true&amp;border_width=2&amp;bg_color=333533&amp;fg_color=FFD700&amp;link_color=FFD700&amp;border_color=FFD700" width="554" height="169"><a href="https://igorchek.itch.io/dot-rescue">Dot Rescue by Igorchek</a></iframe>
+[![Играть на itch.io](https://img.shields.io/badge/Itch.io-Play_Now-FA5C5C?style=for-the-badge&logo=itch.io)](https://igorchek.itch.io/dot-rescue)
