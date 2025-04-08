@@ -8,9 +8,7 @@
 
 ## Input
 
-<p align="Left">
-      <img src="https://i.ibb.co/5hC29gV0/Screnshot-Settings.png" alt="Settings" width="256">
-</p>
+**LKM** - Change direction
 
 ## Screenshots
 
