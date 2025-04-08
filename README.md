@@ -23,6 +23,9 @@
 </details>
 
 <details><summary>Gameplay</summary>
+      
+<img src="https://i.ibb.co/kg6j1w95/Screnshot-Gameplay-2.png" alt="Screnshot2" style="width: 256px;">
+
 
 <div style="display: flex; gap: 10px; flex-wrap: wrap;">
   <img src="https://i.ibb.co/gL6wQSnw/Screnshot-Gameplay-1.png" alt="Screnshot1" style="width: 256px;">
@@ -40,4 +43,4 @@
 
 ## Reference
 
-[![Èãðàòü íà itch.io](https://img.shields.io/badge/Itch.io-Play_Now-FA5C5C?style=for-the-badge&logo=itch.io)](https://igorchek.itch.io/dot-rescue)
+[![Èãðàòü íà itch.io](https://img.shields.io/badge/Ithc_io-play_now-yellow?style=plastic&logo=Itch.io&logoColor=yellow&logoSize=auto&label=Itch.io&labelColor=black)](https://igorchek.itch.io/dot-rescue)
